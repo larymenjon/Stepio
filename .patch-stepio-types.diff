@@ -1,0 +1,59 @@
+*** Begin Patch
+*** Update File: c:/Users/Laryssa/Desktop/StepioApp/StepioApp/stepio-your-child-s-journey/src/types/stepio.ts
+@@
+ export interface Child {
++  id: string;
+   name: string;
+   birthDate: string; // ISO date string
+   condition: ConditionType[];
+   photo?: string;
+   gender?: 'menina' | 'menino' | 'nao_informar';
+ }
+@@
+ export interface Medication {
+   id: string;
++  childId: string;
+   name: string;
+   type: 'xarope' | 'comprimido' | 'gotas' | 'pomada';
+   dosage: string;
+   frequency: 'diario' | '6h' | '8h' | '12h' | 'sob_demanda';
+   startTime: string; // HH:mm format
+@@
+ export interface Event {
+   id: string;
++  childId: string;
+   title: string;
+   professional?: string;
+   datetime: string; // ISO datetime string
+   type: 'therapy' | 'doctor' | 'school';
+   notes?: string;
+ }
+@@
+ export interface Milestone {
+   id: string;
++  childId: string;
+   title: string;
+   description?: string;
+   date: string; // ISO date string
+   photo?: string;
+ }
+@@
+ export interface DailyLog {
++  childId: string;
+   date: string; // YYYY-MM-DD
+   mood?: string;
+   food?: string;
+   sleep?: string;
+   crisis?: string;
+@@
+ export interface StepioData {
+   user: User | null;
+-  child: Child | null;
++  child?: Child | null;
++  children: Child[];
++  activeChildId?: string | null;
+   medications: Medication[];
+   events: Event[];
+   milestones: Milestone[];
+   dailyLogs?: Record<string, DailyLog>;
+*** End Patch

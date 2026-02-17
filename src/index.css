@@ -1,0 +1,350 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Stepio - Pastel playful palette based on logo */
+    --background: 160 30% 97%;
+    --foreground: 170 35% 25%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 170 35% 25%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 170 35% 25%;
+
+    /* Mint/Teal - Primary from cloud */
+    --primary: 168 52% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Light mint background */
+    --secondary: 165 35% 92%;
+    --secondary-foreground: 170 35% 25%;
+
+    --muted: 165 25% 94%;
+    --muted-foreground: 170 20% 45%;
+
+    --accent: 165 40% 88%;
+    --accent-foreground: 170 35% 25%;
+
+    /* Pink from puzzle piece */
+    --pink: 345 65% 68%;
+    --pink-foreground: 0 0% 100%;
+
+    /* Yellow/Cream from puzzle piece */
+    --cream: 42 75% 78%;
+    --cream-foreground: 35 40% 25%;
+
+    /* Blue from puzzle piece */
+    --slate-blue: 210 40% 62%;
+    --slate-blue-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 160 55% 50%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 42 75% 55%;
+    --warning-foreground: 35 40% 20%;
+
+    --border: 165 25% 88%;
+    --input: 165 25% 90%;
+    --ring: 168 52% 65%;
+
+    --radius: 1rem;
+
+    /* Custom Stepio tokens */
+    --hero-gradient-start: 168 52% 65%;
+    --hero-gradient-end: 175 45% 55%;
+    --card-shadow: 0 4px 20px -4px hsl(168 52% 65% / 0.15);
+    --card-shadow-hover: 0 8px 30px -4px hsl(168 52% 65% / 0.2);
+    
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+    --stepio-safe-bottom: env(safe-area-inset-bottom, 0px);
+    --stepio-safe-bottom-min: 16px;
+  }
+
+  .dark {
+    --background: 170 25% 8%;
+    --foreground: 165 40% 95%;
+
+    --card: 170 20% 12%;
+    --card-foreground: 165 40% 95%;
+
+    --popover: 170 20% 12%;
+    --popover-foreground: 165 40% 95%;
+
+    --primary: 168 52% 60%;
+    --primary-foreground: 170 35% 10%;
+
+    --secondary: 170 20% 18%;
+    --secondary-foreground: 165 40% 95%;
+
+    --muted: 170 20% 18%;
+    --muted-foreground: 165 20% 60%;
+
+    --accent: 170 25% 22%;
+    --accent-foreground: 165 40% 95%;
+
+    --pink: 345 55% 60%;
+    --cream: 42 65% 70%;
+    --slate-blue: 210 35% 55%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 170 20% 20%;
+    --input: 170 20% 20%;
+    --ring: 168 52% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-nunito antialiased;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html, body, #root {
+    height: 100%;
+  }
+}
+
+
+@layer components {
+  .stepio-card {
+    @apply bg-card rounded-3xl p-5 shadow-stepio transition-all duration-300;
+  }
+
+  .stepio-card:hover {
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  .stepio-hero-gradient {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--hero-gradient-start)) 0%,
+      hsl(var(--hero-gradient-end)) 100%
+    );
+  }
+
+  .stepio-input {
+    @apply bg-white border-2 border-border rounded-2xl px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 outline-none;
+  }
+
+  .stepio-chip {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full border-2 border-border bg-white text-sm font-medium transition-all duration-200 cursor-pointer select-none;
+  }
+
+  .stepio-chip-selected {
+    @apply border-primary bg-primary/10 text-primary;
+  }
+
+  .stepio-fab {
+    @apply fixed bottom-24 right-4 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center transition-transform duration-200 active:scale-95;
+  }
+
+  .stepio-bottom-nav {
+    @apply fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white border-t border-border px-2 pt-2 z-50;
+    padding-bottom: calc(max(var(--stepio-safe-bottom), var(--stepio-safe-bottom-min)) + 0.5rem);
+  }
+
+  .stepio-bottom-nav-inner {
+    @apply w-full flex justify-around items-center;
+  }
+
+  .stepio-nav-item {
+    @apply flex flex-col items-center gap-1 p-2 rounded-2xl transition-all duration-200 text-muted-foreground;
+  }
+
+  .stepio-nav-item-active {
+    @apply text-emerald-600 bg-emerald-50;
+  }
+
+  .mobile-container {
+    @apply max-w-md mx-auto min-h-screen relative pt-2;
+    background: hsl(var(--background));
+  }
+
+  .stepio-header {
+    @apply relative overflow-hidden mb-4;
+    background: hsl(var(--primary));
+    border-bottom-left-radius: 26px;
+    border-bottom-right-radius: 26px;
+  }
+
+  .stepio-header-home {
+    background: hsl(var(--background));
+  }
+
+  .stepio-header-girl {
+    --header-top: hsl(345 70% 58% / 0.9);
+    --header-top-strong: hsl(345 75% 50% / 0.98);
+  }
+
+  .stepio-header-boy {
+    --header-top: hsl(210 55% 48% / 0.9);
+    --header-top-strong: hsl(210 62% 40% / 0.98);
+  }
+
+  .stepio-header-neutral {
+    --header-top: hsl(168 45% 62% / 0.8);
+    --header-top-strong: hsl(168 50% 54% / 0.95);
+  }
+
+  .stepio-header::after {
+    content: "";
+    position: absolute;
+    left: -8%;
+    right: -8%;
+    bottom: -1px;
+    height: 58px;
+    background: hsl(var(--background));
+    border-top-left-radius: 100% 140%;
+    border-top-right-radius: 100% 140%;
+    transform: scaleX(1.1);
+  }
+
+  .stepio-header-card {
+    @apply relative z-10 mx-4 mt-2 rounded-[22px] bg-primary px-4 py-3 shadow-sm text-white;
+  }
+
+  .stepio-header-card p {
+    color: hsl(0 0% 100% / 0.85);
+  }
+
+  .stepio-header-badge {
+    @apply inline-flex items-center justify-center rounded-full px-3 py-1 text-xs font-bold;
+    background: hsl(var(--background));
+    color: hsl(var(--primary));
+  }
+
+  .stepio-header-content {
+    @apply relative z-10 px-4 pt-6 pb-3 text-center;
+  }
+
+  .stepio-header-lg {
+    min-height: 200px;
+  }
+
+  .stepio-header-sm {
+    min-height: 120px;
+  }
+
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/50 z-50 flex items-end justify-center overflow-y-auto px-3 pt-16 pb-6;
+  }
+
+  .modal-sheet {
+    @apply bg-background w-full max-w-md rounded-t-3xl p-6 animate-slide-up max-h-[85vh] overflow-y-auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@layer utilities {
+  .safe-area-inset-bottom {
+    padding-bottom: max(var(--stepio-safe-bottom), var(--stepio-safe-bottom-min));
+  }
+
+  .shadow-stepio {
+    box-shadow: var(--card-shadow);
+  }
+
+  .text-pink {
+    color: hsl(var(--pink));
+  }
+
+  .bg-pink {
+    background-color: hsl(var(--pink));
+  }
+
+  .text-cream {
+    color: hsl(var(--cream));
+  }
+
+  .bg-cream {
+    background-color: hsl(var(--cream));
+  }
+
+  .text-slate-blue {
+    color: hsl(var(--slate-blue));
+  }
+
+  .bg-slate-blue {
+    background-color: hsl(var(--slate-blue));
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out;
+  }
+
+  .animate-bounce-gentle {
+    animation: bounceGentle 2s infinite;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from { 
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to { 
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes bounceGentle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  @keyframes stepioHeaderFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+}
